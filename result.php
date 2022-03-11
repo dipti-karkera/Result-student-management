@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include('config.php');
+include('dbcon.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

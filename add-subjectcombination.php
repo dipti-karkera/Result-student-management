@@ -11,11 +11,13 @@ if(isset($_POST['submit']))
 {
 $class=$_POST['class'];
 $subject=$_POST['subject']; 
+$teachername=$_POST['teachername']; 
 $status=1;
-$sql="INSERT INTO  tblsubjectcombination(ClassId,SubjectId,status) VALUES(:class,:subject,:status)";
+$sql="INSERT INTO  tblsubjectcombination(ClassId,SubjectId,TeacherName,status) VALUES(:class,:subject,:teachername,:status)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':class',$class,PDO::PARAM_STR);
 $query->bindParam(':subject',$subject,PDO::PARAM_STR);
+$query->bindParam(':TeacherName',$teachername,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
@@ -36,7 +38,7 @@ $error="Something went wrong. Please try again";
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SRMS Admin Subject Combination< </title>
+        <title> Subject Combination< </title>
         <link rel="stylesheet" href="bootstrap.min.css" media="screen" >
         <link rel="stylesheet" href="font-awesome.min.css" media="screen" >
         <link rel="stylesheet" href="animate.min.css" media="screen" >
@@ -117,7 +119,7 @@ if($query->rowCount() > 0)
 {
 foreach($results as $result)
 {   ?>
-<option value="<?php echo htmlentities($result->id); ?>"><?php echo htmlentities($result->ClassName); ?>&nbsp; Section-<?php echo htmlentities($result->Section); ?></option>
+<option value="<?php echo htmlentities($result->id); ?>"><?php echo htmlentities($result->ClassName); ?>&nbsp; Section-<?php echo htmlentities($result->Section); ?>&nbsp; Teacher <?php echo htmlentities($result->TeacherName); ?></option>
 <?php }} ?>
  </select>
                                                         </div>
@@ -135,7 +137,7 @@ if($query->rowCount() > 0)
 {
 foreach($results as $result)
 {   ?>
-<option value="<?php echo htmlentities($result->id); ?>"><?php echo htmlentities($result->SubjectName); ?></option>
+<option value="<?php echo htmlentities($result->id); ?>"><?php echo htmlentities($result->SubjectName); ?><?php echo htmlentities($result->TeacherName); ?>"></option>
 <?php }} ?>
  </select>
                                                         </div>

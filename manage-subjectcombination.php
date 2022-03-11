@@ -134,6 +134,7 @@ else if($error){?>
                                                             <th>#</th>
                                                             <th>Class and Section</th>
                                                             <th>Subject </th>
+                                                            <th>Teacher Name </th>
                                                             <th>Status</th>
                                                             <th>Action</th>
                                                         </tr>
@@ -143,12 +144,13 @@ else if($error){?>
                                                           <th>#</th>
                                                             <th>Class and Section</th>
                                                             <th>Subject </th>
+                                                            <th>Teacher Name </th>
                                                             <th>Status</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </tfoot>
                                                     <tbody>
-<?php $sql = "SELECT tblclasses.ClassName,tblclasses.Section,tblsubjects.SubjectName,tblsubjectcombination.id as scid,tblsubjectcombination.status from tblsubjectcombination join tblclasses on tblclasses.id=tblsubjectcombination.ClassId  join tblsubjects on tblsubjects.id=tblsubjectcombination.SubjectId";
+<?php $sql = "SELECT tblclasses.ClassName,tblclasses.Section,tblsubjects.SubjectName,tblsubjects.TeacherName,tblsubjectcombination.id as scid,tblsubjectcombination.status from tblsubjectcombination join tblclasses on tblclasses.id=tblsubjectcombination.ClassId  join tblsubjects on tblsubjects.id=tblsubjectcombination.SubjectId";
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
